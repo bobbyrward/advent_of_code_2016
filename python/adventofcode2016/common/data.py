@@ -1,8 +1,8 @@
 import os
 
 
-def get_data_content(day, problem):
-    filename = os.path.join(
+def get_data_filename(day, problem):
+    return os.path.join(
         os.path.dirname(__file__),
         '..',
         '..',
@@ -11,7 +11,14 @@ def get_data_content(day, problem):
         'data_{:02d}_{:02d}.txt'.format(day, problem),
     )
 
-    filename = os.path.normpath(filename)
+    return filename
 
-    with open(filename, 'rb') as data_fp:
+
+def get_data_content(day, problem):
+    with open(get_data_filename(day, problem), 'rb') as data_fp:
         return data_fp.read()
+
+
+def get_data_lines(day, problem):
+    with open(get_data_filename(day, problem), 'rb') as data_fp:
+        return data_fp.readlines()
